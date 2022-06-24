@@ -18,11 +18,14 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + "/signup.html");
 })
 
+const apiKey = process.env.API_KEY;
+const server = process.env.SERVER;
+const list = process.env.LIST;
 
 
 mailchimp.setConfig({
-    apiKey: process.env.API_KEY,
-    server: process.env.SERVER,
+    apiKey: apiKey,
+    server: server,
 });
 
 app.post("/", function (req, res) {
@@ -31,7 +34,7 @@ app.post("/", function (req, res) {
     const secondName = req.body.secondName;
     const email = req.body.email;
     //*****************************ENTER YOU LIST ID HERE******************************
-    const listId = "9b1e5a2333";
+    const listId = list;
     //Creating an object with the users data
     const subscribingUser = {
         firstName: firstName,
@@ -78,6 +81,6 @@ app.post("/failure.html",function(req,res) {
 
 
 
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT || 3000, function () {
 })
 
