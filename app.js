@@ -79,6 +79,5 @@ app.post("/failure.html",function(req,res) {
 
 
 app.listen(process.env.PORT, function () {
-    console.log("Server is up and running on port 3000");
 })
 
