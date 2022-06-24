@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+require('dotenv').config(); 
 
 
 const app = express();
@@ -20,8 +21,8 @@ app.get("/", function (req, res) {
 
 
 mailchimp.setConfig({
-    apiKey: "4584c403c03240f5d949617181399b6a-us10",
-    server: "us10",
+    apiKey: process.env.API_KEY,
+    server: process.env.SERVER,
 });
 
 app.post("/", function (req, res) {
@@ -47,7 +48,7 @@ app.post("/", function (req, res) {
          LNAME: subscribingUser.lastName
         }
         });
-        console.log(response); 
+      
         //If all goes well logging the contact's id
          res.sendFile(__dirname + "/success.html")
          console.log(
@@ -81,9 +82,3 @@ app.listen(process.env.PORT || 4000, function () {
     console.log("Server is up and running on port 3000");
 })
 
-
-// API KEY 
-// 4584c403c03240f5d949617181399b6a-us10 
-
-// List ID 
-// 9b1e5a2333
